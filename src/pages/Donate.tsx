@@ -6,15 +6,93 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+
+declare const Razorpay: any;
 
 const DonationPage = () => {
+  const { toast } = useToast();
   const navigate = useNavigate();
   const [showCustomAmount, setShowCustomAmount] = useState(false);
   const [customAmount, setCustomAmount] = useState("");
   const [error, setError] = useState("");
+  
+  const initializeRazorpay = (amount: number) => {
+    const options = {
+      key: "rzp_live_NBVmt4e56HO06e",
+      amount: amount * 100, // Razorpay expects amount in paise
+      currency: "INR",
+      name: "SnapTools",
+      description: "Donation to SnapTools",
+      handler: function(response: any) {
+        console.log("Payment successful", response);
+        const paymentDetails = {
+          razorpay_payment_id: response.razorpay_payment_id,
+          amount: amount.toString(),
+          currency: "INR",
+          status: "Successful",
+          timestamp: new Date().toLocaleString()
+        };
+        navigate('/payment-success', { state: { paymentDetails } });
+      },
+      prefill: {
+        name: "",
+        email: ""
+      },
+      theme: {
+        color: "#6366f1"
+      },
+      modal: {
+        confirm_close: true,
+        escape: true,
+        handleback: true
+      },
+      retry: {
+        enabled: true,
+        max_count: 3
+      },
+      timeout: 300,
+      config: {
+        display: {
+          blocks: {
+            utib: {
+              name: "Pay using AXIS Bank",
+              instruments: [{
+                method: "card",
+                issuers: ["UTIB"]
+              }, {
+                method: "netbanking",
+                banks: ["UTIB"]
+              }]
+            }
+          },
+          sequence: ["block.utib"],
+          preferences: {
+            show_default_blocks: true
+          }
+        }
+      }
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.on('payment.failed', function (response: any){
+      console.error('Payment failed:', response.error);
+      toast({
+        title: "Payment Failed",
+        description: "Please try again or use a different payment method.",
+        variant: "destructive"
+      });
+    });
+    rzp.open();
+  };
 
   const handleDonate = (amount: number) => {
-    navigate("/payment", { state: { amount } });
+    try {
+      initializeRazorpay(amount);
+    } catch (error) {
+      setError("Failed to initialize payment. Please try again.");
+      console.error("Razorpay initialization error:", error);
+    }
   };
 
   const handleCustomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +108,7 @@ const DonationPage = () => {
       return;
     }
     if (amount > 1000) {
-      setError("Amount cannot exceed $1,000");
+      setError("Amount cannot exceed ₹1,000");
       return;
     }
     if (amount <= 0) {
@@ -80,7 +158,7 @@ const DonationPage = () => {
               className="h-16 text-lg"
               onClick={() => handleDonate(amount)}
             >
-              ${amount}
+              ₹{amount}
             </Button>
           ))}
         </div>
@@ -99,7 +177,7 @@ const DonationPage = () => {
           <div className="mt-6">
             <div className="relative max-w-xs mx-auto">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                $
+                ₹
               </span>
               <Input
                 type="number"
@@ -122,6 +200,16 @@ const DonationPage = () => {
             </Button>
           </div>
         )}
+      <div className="flex justify-center gap-4 mt-6">
+        <Button
+          variant="outline"
+          size="lg"
+          className="w-full md:w-auto px-8"
+          onClick={() => navigate('/contact')}
+        >
+          Having problems?
+        </Button>
+      </div>
       </div>
       </div>
       <Footer />

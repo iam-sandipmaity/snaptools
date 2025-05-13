@@ -18,7 +18,7 @@ import Documentation from "./pages/DocumentationPage";
 import Pricing from "./pages/pricing";
 import Features from "./pages/features";
 import Donate from "./pages/Donate"
-import Payment from "./pages/Payment"
+import PaymentSuccess from "./pages/PaymentSuccess"
 
 // Create the query client
 const queryClient = new QueryClient();
@@ -44,7 +44,7 @@ const App = () => (
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/features" element={<Features />} />
               <Route path="/donate" element={<Donate />} />
-              <Route path="/payment" element={<Payment />} />
+              <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
