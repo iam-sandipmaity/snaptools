@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/theme-provider";
 import { MotionConfig } from "framer-motion";
+import { VercelAnalytics } from "@/components/analytics";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ToolPage from "./pages/ToolPage";
@@ -47,6 +48,7 @@ const App = () => (
               <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <VercelAnalytics />
           </BrowserRouter>
         </TooltipProvider>
       </MotionConfig>
