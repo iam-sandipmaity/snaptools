@@ -33,7 +33,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => ({
     target: 'esnext',
     sourcemap: true,
     rollupOptions: {
-      external: [],
+      external: ['@vercel/analytics'],
       output: {
         format: 'es',
         inlineDynamicImports: false,
