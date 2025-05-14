@@ -8,6 +8,7 @@ import Footer from "@/components/footer";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 
+
 declare const Razorpay: any;
 
 const DonationPage = () => {
@@ -16,14 +17,42 @@ const DonationPage = () => {
   const [showCustomAmount, setShowCustomAmount] = useState(false);
   const [customAmount, setCustomAmount] = useState("");
   const [error, setError] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [message, setMessage] = useState("");
+  const [formErrors, setFormErrors] = useState({
+    name: "",
+    email: "",
+    mobile: ""
+  });
+
+  const validEmailDomains = [
+    "gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com",
+    "msn.com", "protonmail.com", "zoho.com", "gmx.com", "yandex.com",
+    "mail.com", "tutanota.com", "neomail.com", "titan.com", "rediffmail.com",
+    "comcast.net", "icloud.com", "me.com", "mac.com", "mail.ru",
+    "fastmail.com", "hushmail.com"
+  ];
+
+  const validateEmail = (email: string) => {
+    if (!email) return "Email is required";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Invalid email format";
+    const domain = email.split('@')[1].toLowerCase();
+    if (!validEmailDomains.includes(domain)) return "Please use a valid email domain";
+    return "";
+  };
+
+
   
   const initializeRazorpay = (amount: number) => {
     const options = {
-      key: "rzp_live_NBVmt4e56HO06e",
+      key: "rzp_live_TovZnWYZRmxQm9",
+      // key: import.meta.env.RAZORPAY_KEY_ID,
       amount: amount * 100, // Razorpay expects amount in paise
       currency: "INR",
       name: "SnapTools",
-      description: "Donation to SnapTools",
+      description: message ? `${message}` : "Donation to SnapTools",
       handler: function(response: any) {
         console.log("Payment successful", response);
         const paymentDetails = {
@@ -31,13 +60,18 @@ const DonationPage = () => {
           amount: amount.toString(),
           currency: "INR",
           status: "Successful",
-          timestamp: new Date().toLocaleString()
+          timestamp: new Date().toLocaleString(),
+          name: name,
+          email: email,
+          mobile: mobile,
+          message: message
         };
         navigate('/payment-success', { state: { paymentDetails } });
       },
       prefill: {
-        name: "",
-        email: ""
+        name,
+        email,
+        contact: mobile
       },
       theme: {
         color: "#6366f1"
@@ -87,6 +121,14 @@ const DonationPage = () => {
   };
 
   const handleDonate = (amount: number) => {
+    if (!name || !email || !mobile) {
+      setFormErrors({
+        name: name ? "" : "Name is required",
+        email: email ? "" : "Email is required",
+        mobile: mobile ? "" : "Mobile number is required"
+      });
+      return;
+    }
     try {
       initializeRazorpay(amount);
     } catch (error) {
@@ -149,6 +191,57 @@ const DonationPage = () => {
       </div>
 
       <div className="max-w-2xl mx-auto bg-card rounded-lg p-8 shadow-lg">
+        <h2 className="text-2xl font-semibold mb-6 text-center">Donor Information</h2>
+        <div className="space-y-4 mb-8">
+          <div>
+            <Input
+              type="text"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                setFormErrors(prev => ({ ...prev, name: e.target.value ? "" : "Name is required" }));
+              }}
+              placeholder="Your Name"
+              className="w-full"
+            />
+            {formErrors.name && <p className="text-destructive text-sm mt-1">{formErrors.name}</p>}
+          </div>
+          <div>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setFormErrors(prev => ({ ...prev, email: validateEmail(e.target.value) }));
+              }}
+              placeholder="Your Email"
+              className="w-full"
+            />
+            {formErrors.email && <p className="text-destructive text-sm mt-1">{formErrors.email}</p>}
+          </div>
+          <div>
+            <Input
+              type="tel"
+              value={mobile}
+              onChange={(e) => {
+                setMobile(e.target.value);
+                setFormErrors(prev => ({ ...prev, mobile: e.target.value ? "" : "Mobile number is required" }));
+              }}
+              placeholder="<countrycode>number (e.g. +919999999999)"
+              className="w-full"
+            />
+            {formErrors.mobile && <p className="text-destructive text-sm mt-1">{formErrors.mobile}</p>}
+          </div>
+          <div>
+            <Input
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Add a special message (optional)"
+              className="w-full"
+            />
+          </div>
+        </div>
         <h2 className="text-2xl font-semibold mb-6 text-center">Choose Amount</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[5, 10, 25, 50].map((amount) => (

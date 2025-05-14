@@ -13,6 +13,10 @@ export interface PaymentDetails {
   currency: string;
   status: string;
   timestamp: string;
+  name?: string;
+  email?: string;
+  mobile?: string;
+  message?: string;
 }
 
 const PaymentSuccess = () => {
@@ -42,9 +46,12 @@ const PaymentSuccess = () => {
       type: blob.type,
       lastModified: Date.now()
     });
+    const shareText = paymentDetails.message
+      ? `I have donated ${paymentDetails.amount} ${paymentDetails.currency} to SnapTools with message: ${paymentDetails.message}`
+      : `I have donated ${paymentDetails.amount} ${paymentDetails.currency} to SnapTools`;
     const shareData = {
       title: 'Payment Confirmation',
-      text: `I have donated ${paymentDetails.amount} ${paymentDetails.currency} to SnapTools`,
+      text: shareText,
       files: [file]
     };
 
@@ -86,6 +93,30 @@ const PaymentSuccess = () => {
           </div>
 
           <div className="space-y-4 mb-8">
+            {paymentDetails.name && (
+              <div className="flex justify-between py-2 border-b">
+                <span className="text-gray-600">Name</span>
+                <span className="font-medium">{paymentDetails.name}</span>
+              </div>
+            )}
+            {paymentDetails.email && (
+              <div className="flex justify-between py-2 border-b">
+                <span className="text-gray-600">Email</span>
+                <span className="font-medium">{paymentDetails.email}</span>
+              </div>
+            )}
+            {paymentDetails.mobile && (
+              <div className="flex justify-between py-2 border-b">
+                <span className="text-gray-600">Mobile</span>
+                <span className="font-medium">{paymentDetails.mobile}</span>
+              </div>
+            )}
+            {paymentDetails.message && (
+              <div className="flex justify-between py-2 border-b">
+                <span className="text-gray-600">Message</span>
+                <span className="font-medium">{paymentDetails.message}</span>
+              </div>
+            )}
             <div className="flex justify-between py-2 border-b">
               <span className="text-gray-600">Payment ID</span>
               <span className="font-medium">{paymentDetails.razorpay_payment_id}</span>
