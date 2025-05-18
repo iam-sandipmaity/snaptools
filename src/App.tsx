@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import ToolList from "./pages/ToolList";
+import ToolCategoryPage from "./pages/ToolCategoryPage";
 
 import About from "./pages/AboutPage";
 import Documentation from "./pages/DocumentationPage";
@@ -36,6 +37,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/tools" element={<ToolList />} />
+                <Route path="/tools/:categoryId" element={<ToolCategoryPage />} />
                 <Route path="/tools/:categoryId/:toolId" element={<ToolPage />} />
                 <Route path="/tools/:toolId" element={<ToolPage />} />
                 <Route path="/contact" element={<Contact />} />

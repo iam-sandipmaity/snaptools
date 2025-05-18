@@ -118,6 +118,7 @@ export const toolCategories: ToolCategory[] = [
     color: "bg-tooltopia-soft-orange",
     subTools: [
       { id: "qr-generator", title: "QR Code Generator" },
+      { id: "barcode-generator", title: "Barcode Generator" },
       { id: "qr-scanner", title: "QR Code Scanner" },
     ],
   },
@@ -191,9 +192,11 @@ export const toolCategories: ToolCategory[] = [
       { id: "yt-video", title: "YouTube Video Downloader" },
       { id: "tweet-generator", title: "Tweet Generator" },
       { id: "instagram-post", title: "Instagram Post Generator" },
-      { id: "line-sticker", title: "Line Sticker" },
+      { id: "instagram-downloader", title: "Instagram Photo Downloader" },
       { id: "yt-trending", title: "Youtube Trending" },
       { id: "yt-tags", title: "Youtube Tags" },
+      { id: "yt-most-viewed", title: "Youtube Most Viewed" },
+      { id: "youtube-stats", title: "Youtube Stats" },
     ],
   },
   {

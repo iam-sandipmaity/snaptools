@@ -3,12 +3,16 @@ import cors from 'cors';
 import axios from 'axios';
 import dotenv from 'dotenv';
 import path from 'path';
+import instagramRouter from './routes/instagram';
 
 dotenv.config({
   path: path.resolve(__dirname, '../../.env')
 });
 
 const app = express();
+
+// Routes
+app.use('/api/instagram', instagramRouter);
 const port = process.env.PORT || 3001;
 
 app.use(cors());

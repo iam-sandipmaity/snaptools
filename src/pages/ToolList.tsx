@@ -5,11 +5,13 @@ import ToolsSearchBar from "@/components/tools-search-bar";
 import { toolCategories } from "@/data/tools";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useNavigate } from "react-router-dom";
 
 const ToolList = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [filteredCategories, setFilteredCategories] = useState(toolCategories);
@@ -44,6 +46,13 @@ const ToolList = () => {
       <Header />
       <main className="flex-grow container py-8">
         <div className="mb-8">
+          <button
+            onClick={() => navigate('/')}
+            className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-4 bg-transparent border-none cursor-pointer"
+          >
+            <ArrowLeft size={16} className="mr-2" />
+            Back
+          </button>
           <h1 className="text-4xl font-bold mb-4">All Tools</h1>
           <p className="text-muted-foreground max-w-2xl mb-6">
             Browse our complete collection of tools, organized by category.

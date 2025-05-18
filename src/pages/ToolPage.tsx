@@ -1,5 +1,5 @@
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { useState, useEffect } from "react";
@@ -31,6 +31,7 @@ import file from "@/components/tools/file-sharing";
 
 const ToolPage = () => {
   const { categoryId, toolId } = useParams();
+  const navigate = useNavigate();
   const [category, setCategory] = useState<ToolCategory | null>(null);
   const [subTool, setSubTool] = useState<{ id: string; title: string; description?: string } | null>(null);
 
@@ -58,18 +59,89 @@ const ToolPage = () => {
     if (foundCategory && toolId) {
       const foundTool = foundCategory.subTools?.find((tool) => tool.id === toolId);
       setSubTool(foundTool || null);
+    } else if (foundCategory) {
+      // If only category is provided, don't set a subtool
+      setSubTool(null);
     }
   }, [categoryId, toolId]);
 
-  if (!category || !subTool) {
+  if (!category) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4">Category not found</h1>
+            <Link to="/#tools">
+              <Button>Back to Tools</Button>
+            </Link>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // If we have a category but no specific tool selected, show the category view
+  if (!toolId) {
+    const Icon = category.icon;
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow container py-8">
+          <div className="mb-8">
+            <button
+              onClick={() => navigate('/tools')}
+              className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-4 bg-transparent border-none cursor-pointer"
+            >
+              <ArrowLeft size={16} className="mr-2" />
+              Back
+            </button>
+            
+            <div className="flex items-center gap-4 mb-6">
+              <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center", category.color)}>
+                <Icon size={24} className="text-primary-foreground" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold">{category.title}</h1>
+                <p className="text-muted-foreground">Available Tools</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {category.subTools?.map((tool) => (
+              <Link
+                key={tool.id}
+                to={`/tools/${category.id}/${tool.id}`}
+                className="group block p-6 rounded-xl border bg-card hover:shadow-lg transition-all hover:border-primary/20"
+              >
+                <h3 className="text-xl font-medium group-hover:text-primary transition-colors mb-2">
+                  {tool.title}
+                </h3>
+                {tool.description && (
+                  <p className="text-muted-foreground">
+                    {tool.description}
+                  </p>
+                )}
+              </Link>
+            ))}
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!subTool) {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Tool not found</h1>
-            <Link to="/#tools">
-              <Button>Back to Tools</Button>
+            <Link to={`/tools/${category.id}`}>
+              <Button>Back to Category</Button>
             </Link>
           </div>
         </main>
@@ -171,10 +243,21 @@ const ToolPage = () => {
       <Header />
       <main className="flex-grow container py-8">
         <div className="mb-8">
-          <Link to="/#tools" className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-4">
+          <button
+            onClick={() => {
+              if (categoryId && toolId) {
+                navigate(`/tools/${categoryId}`);
+              } else if (categoryId) {
+                navigate('/tools');
+              } else {
+                navigate('/#tools');
+              }
+            }}
+            className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-4 bg-transparent border-none cursor-pointer"
+          >
             <ArrowLeft size={16} className="mr-2" />
-            Back to all tools
-          </Link>
+            Back
+          </button>
           
           <div className="flex items-center gap-4 mb-6">
             <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center", category.color)}>

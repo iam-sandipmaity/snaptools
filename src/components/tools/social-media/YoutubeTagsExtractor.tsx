@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Tag, Copy } from "lucide-react";
+import { getVideoMetadata } from "@/lib/api/youtube";
 
 const YoutubeTagsExtractor: React.FC = () => {
   const [url, setUrl] = useState("");
@@ -27,25 +28,19 @@ const YoutubeTagsExtractor: React.FC = () => {
 
     setLoading(true);
     try {
-      // Note: This is a placeholder for the actual tag extraction implementation
-      // In a real implementation, you would need to:
-      // 1. Set up a backend service to handle YouTube metadata extraction
-      // 2. Use YouTube Data API or web scraping to get video tags
-      // 3. Handle the extraction through your backend API
-      
-      // Simulate some demo tags
-      const demoTags = [
-        "demo",
-        "youtube",
-        "tags",
-        "example",
-        "video",
-        "trending",
-      ];
-      setTags(demoTags);
-      toast.info("This is a demo version. Backend implementation required for actual tag extraction.");
+      const { tags } = await getVideoMetadata(videoId);
+      if (tags.length === 0) {
+        toast.info("No tags found for this video");
+        return;
+      }
+      setTags(tags);
+      toast.success("Tags extracted successfully!");
     } catch (error) {
-      toast.error("Failed to extract tags");
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("Failed to extract tags");
+      }
     } finally {
       setLoading(false);
     }
@@ -110,7 +105,7 @@ const YoutubeTagsExtractor: React.FC = () => {
           )}
 
           <p className="text-sm text-muted-foreground text-center">
-            Note: This is a demo version. Please ensure you comply with YouTube's terms of service.
+            Note: Data is fetched from Google API and may not always be accurate. Please ensure you comply with YouTube's terms of service.
           </p>
         </div>
       </CardContent>
