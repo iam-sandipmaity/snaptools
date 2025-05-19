@@ -20,7 +20,6 @@ import SHA3Tool from './SHA3Tool';
 import URLEncodeTool from './URLEncoderTool';
 import BCryptTool from './BCryptTool';
 import SCryptTool from './SCryptTool';
-import Argon2Tool from './Argon2Tool';
 import PBKDF2Tool from './PBKDF2Tool';
 
 const encryptionTools: EncryptionToolComponentMap = {
@@ -44,7 +43,7 @@ const encryptionTools: EncryptionToolComponentMap = {
   'url': URLEncodeTool,
   'bcrypt': BCryptTool,
   'scrypt': SCryptTool,
-  'argon2': Argon2Tool,
+
   'pbkdf2': PBKDF2Tool
 };
 

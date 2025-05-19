@@ -249,7 +249,6 @@ export const toolCategories: ToolCategory[] = [
       { id: "ripemd160", title: "RIPEMD160 Encryption", description: "RACE Integrity Primitives Evaluation Message Digest - 160-bit cryptographic hash function" },
       { id: "bcrypt", title: "BCrypt Encryption", description: "Password hashing function designed to be slow and resist rainbow table attacks" },
       { id: "scrypt", title: "SCrypt Encryption", description: "Password-based key derivation function designed to be memory-hard" },
-      { id: "argon2", title: "Argon2 Encryption", description: "Modern password hashing function winner of the Password Hashing Competition" },
       { id: "pbkdf2", title: "PBKDF2 Encryption", description: "Password-Based Key Derivation Function 2 - Applies a pseudorandom function to derive keys" }
     ],
   },
