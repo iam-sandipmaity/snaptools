@@ -7,6 +7,7 @@ import ImageDimensionChanger from "./ImageDimensionChanger";
 import ImageCropper from "./ImageCropper";
 import ImageColorInverter from "./ImageColorInverter";
 import ImageBlackAndWhite from "./ImageBlackAndWhite";
+import ImageFilterEffects from "./ImageFilterEffects";
 
 type ImageToolComponentMap = {
   [key: string]: React.ComponentType;
@@ -21,6 +22,7 @@ const imageTools: ImageToolComponentMap = {
   "image-cropper": ImageCropper,
   "image-color-inverter": ImageColorInverter,
   "image-black-and-white": ImageBlackAndWhite,
+  "image-filter-effects": ImageFilterEffects
 };
 
 export default imageTools;

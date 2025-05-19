@@ -37,7 +37,7 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow container py-12">
+      <main className="flex-grow container py-12 pt-20">
         <section className="mb-16 text-center">
           <h1 className="text-4xl font-bold mb-6">About SnapTools</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">

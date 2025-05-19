@@ -69,6 +69,26 @@ const Base64Tool = () => {
   return (
     <div className="container mx-auto p-6 space-y-6">
       <Card className="p-6">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold mb-4">Base64 Encoding Tool</h2>
+          <p className="mb-2">Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format by translating it into a radix-64 representation.</p>
+          <div className="space-y-2 text-sm text-muted-foreground">
+            <p>✨ <strong>What is Base64?</strong> Base64 encoding converts binary data into a text format using 64 characters (A-Z, a-z, 0-9, + and /). It's commonly used when you need to transmit binary data over media designed to deal with text.</p>
+            <p>🔐 <strong>Common Uses:</strong></p>
+            <ul className="list-disc list-inside pl-4 space-y-1">
+              <li>Encoding binary data in emails (MIME)</li>
+              <li>Embedding image data in HTML/CSS</li>
+              <li>Transmitting binary data in URLs</li>
+              <li>Storing binary data in JSON</li>
+            </ul>
+            <p>📝 <strong>How to Use:</strong></p>
+            <ul className="list-disc list-inside pl-4 space-y-1">
+              <li>Enter your text in the input field</li>
+              <li>Click Encode to convert to Base64 format</li>
+              <li>Click Decode to convert Base64 back to original text</li>
+            </ul>
+          </div>
+        </div>
         <div className="space-y-4">
           <div className="space-y-2">
             <Label>Input Text</Label>

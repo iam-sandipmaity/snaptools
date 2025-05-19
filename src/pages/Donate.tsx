@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FeatureCard from "@/components/feature-card";
-import { Heart, CreditCard, Coffee, Gift } from "lucide-react";
+import { Heart, CreditCard, Coffee, Gift, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -14,6 +14,7 @@ declare const Razorpay: any;
 const DonationPage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [isAnonymous, setIsAnonymous] = useState(false);
   const [showCustomAmount, setShowCustomAmount] = useState(false);
   const [customAmount, setCustomAmount] = useState("");
   const [error, setError] = useState("");
@@ -26,6 +27,8 @@ const DonationPage = () => {
     email: "",
     mobile: ""
   });
+  const [confirmAnonymous, setConfirmAnonymous] = useState(false);
+  const [useRandomMobile, setUseRandomMobile] = useState(false);
 
   const validEmailDomains = [
     "gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com",
@@ -68,7 +71,7 @@ const DonationPage = () => {
         };
         navigate('/payment-success', { state: { paymentDetails } });
       },
-      prefill: {
+      prefill: isAnonymous ? {} : {
         name,
         email,
         contact: mobile
@@ -120,8 +123,12 @@ const DonationPage = () => {
     rzp.open();
   };
 
+  const generateRandomMobile = () => {
+    return '+919999999999';
+  };
+
   const handleDonate = (amount: number) => {
-    if (!name || !email || !mobile) {
+    if (!isAnonymous && (!name || !email || !mobile)) {
       setFormErrors({
         name: name ? "" : "Name is required",
         email: email ? "" : "Email is required",
@@ -129,8 +136,78 @@ const DonationPage = () => {
       });
       return;
     }
+    
+    if (isAnonymous && !confirmAnonymous) {
+      setError("Please confirm that you understand this is an anonymous donation without a receipt");
+      return;
+    }
+
+    let currentMobile = mobile;
+    if (isAnonymous && useRandomMobile) {
+      currentMobile = generateRandomMobile();
+      setMobile(currentMobile);
+    }
     try {
-      initializeRazorpay(amount);
+      // Update mobile state before initializing payment
+      if (isAnonymous && useRandomMobile) {
+        currentMobile = generateRandomMobile();
+        setMobile(currentMobile);
+      }
+      
+      // Initialize payment with updated mobile number
+      const options = {
+        key: "rzp_live_TovZnWYZRmxQm9",
+        amount: amount * 100,
+        currency: "INR",
+        name: "SnapTools",
+        description: message ? `${message}` : "Donation to SnapTools",
+        prefill: isAnonymous ? {
+          contact: useRandomMobile ? currentMobile : undefined
+        } : {
+          name,
+          email,
+          contact: mobile
+        },
+        handler: function(response) {
+          console.log("Payment successful", response);
+          const paymentDetails = {
+            razorpay_payment_id: response.razorpay_payment_id,
+            amount: amount.toString(),
+            currency: "INR",
+            status: "Successful",
+            timestamp: new Date().toLocaleString(),
+            name: isAnonymous ? undefined : name,
+            email: isAnonymous ? undefined : email,
+            mobile: isAnonymous ? (useRandomMobile ? currentMobile : undefined) : mobile,
+            message: message
+          };
+          navigate('/payment-success', { state: { paymentDetails } });
+        },
+        theme: {
+          color: "#6366f1"
+        },
+        modal: {
+          confirm_close: true,
+          escape: true,
+          handleback: true
+        },
+        retry: {
+          enabled: true,
+          max_count: 3
+        },
+        timeout: 300
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.on('payment.failed', function (response){
+        console.error('Payment failed:', response.error);
+        toast({
+          title: "Payment Failed",
+          description: "Please try again or use a different payment method.",
+          variant: "destructive"
+        });
+      });
+      rzp.open();
     } catch (error) {
       setError("Failed to initialize payment. Please try again.");
       console.error("Razorpay initialization error:", error);
@@ -191,7 +268,32 @@ const DonationPage = () => {
       </div>
 
       <div className="max-w-2xl mx-auto bg-card rounded-lg p-8 shadow-lg">
-        <h2 className="text-2xl font-semibold mb-6 text-center">Donor Information</h2>
+        <div className="flex justify-center gap-4 mb-8">
+          <Button
+            variant={isAnonymous ? "default" : "outline"}
+            onClick={() => {
+              setIsAnonymous(true);
+              setError("");
+              setFormErrors({ name: "", email: "", mobile: "" });
+            }}
+          >
+            Anonymous Donation
+          </Button>
+          <Button
+            variant={!isAnonymous ? "default" : "outline"}
+            onClick={() => {
+              setIsAnonymous(false);
+              setError("");
+              setConfirmAnonymous(false);
+            }}
+          >
+            Regular Donation
+          </Button>
+        </div>
+
+        {!isAnonymous && (
+          <>
+            <h2 className="text-2xl font-semibold mb-6 text-center">Donor Information</h2>
         <div className="space-y-4 mb-8">
           <div>
             <Input
@@ -242,6 +344,43 @@ const DonationPage = () => {
             />
           </div>
         </div>
+        </>)}
+
+        {isAnonymous && (
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold mb-6 text-center">Anonymous Donation</h2>
+            <div className="flex items-center gap-2 mb-4">
+              <input
+                type="checkbox"
+                id="anonymous-confirm"
+                checked={confirmAnonymous}
+                onChange={(e) => {
+                  setConfirmAnonymous(e.target.checked);
+                  setError("");
+                }}
+                className="mt-1 w-5 h-5 cursor-pointer"
+              />
+              <label htmlFor="anonymous-confirm" className="text-sm text-muted-foreground cursor-pointer">
+                I understand this is an anonymous donation. And Donation slip will be anonymous too. 
+              </label>
+            </div>
+            <div className="flex items-start gap-2 mb-4">
+              <input
+                type="checkbox"
+                id="random-mobile"
+                checked={useRandomMobile}
+                onChange={(e) => setUseRandomMobile(e.target.checked)}
+                className="mt-1 w-5 h-5 cursor-pointer"
+              />
+              <label htmlFor="random-mobile" className="text-sm font-semibold text-yellow-500 dark:text-yellow-400 flex items-center gap-2">
+                <AlertTriangle className="h-4 w-4" />
+                Use a random mobile number for payment (Recommended for enhanced privacy)
+              </label>
+            </div>
+            {error && <p className="text-destructive text-sm mb-4">{error}</p>}
+          </div>
+        )}
+
         <h2 className="text-2xl font-semibold mb-6 text-center">Choose Amount</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[5, 10, 25, 50].map((amount) => (

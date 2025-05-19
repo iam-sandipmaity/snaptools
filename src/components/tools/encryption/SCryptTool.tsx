@@ -1,3 +1,35 @@
+/**
+ * SCrypt Password Hashing Tool Component
+ *
+ * SCrypt is a memory-hard key derivation function designed by Colin Percival.
+ * It is specifically designed to make it costly to perform large-scale custom hardware
+ * attacks by requiring a large amount of memory. This makes it particularly effective
+ * against ASIC-based attacks.
+ *
+ * Key Features:
+ * - Memory-hard algorithm (requires significant RAM)
+ * - Configurable cost parameters (N, r, p)
+ * - Built-in salt support
+ * - Highly resistant to hardware-based attacks
+ *
+ * Parameters:
+ * - N: CPU/Memory cost parameter (must be power of 2)
+ * - r: Block size parameter (8 is common)
+ * - p: Parallelization parameter (1 is common)
+ * - dkLen: Desired key length in bytes
+ *
+ * Common Use Cases:
+ * - Password hashing in high-security environments
+ * - Key derivation for encryption
+ * - Cryptocurrency applications
+ *
+ * Security Considerations:
+ * - Choose N based on available memory and security requirements
+ * - Higher N values provide better security but require more memory
+ * - Use cryptographically secure salt values
+ * - Store all parameters (N, r, p) with the hash
+ */
+
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -58,6 +90,26 @@ const SCryptTool: React.FC = () => {
     <Card className="w-full max-w-3xl mx-auto">
       <CardContent className="p-6">
         <div className="space-y-4">
+          <div className="space-y-2 mb-6 text-sm text-muted-foreground">
+            <p className="font-medium text-foreground">SCrypt Password Hashing</p>
+            <p>SCrypt is a memory-hard key derivation function designed to be resistant to hardware-based attacks by requiring significant memory resources. This makes it particularly effective for password hashing and cryptocurrency applications.</p>
+            <div className="mt-4">
+              <p className="font-medium text-foreground mb-2">Key Features:</p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Memory-hard algorithm requiring significant RAM</li>
+                <li>Configurable cost parameters for security scaling</li>
+                <li>Built-in salt support for unique hashes</li>
+              </ul>
+            </div>
+            <div className="mt-4">
+              <p className="font-medium text-foreground mb-2">Security Tips:</p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Choose cost factor based on available memory and security needs</li>
+                <li>Always use cryptographically secure random salt</li>
+                <li>Higher cost factors provide better security but require more memory</li>
+              </ul>
+            </div>
+          </div>
           <div className="space-y-2">
             <Label>Input Text</Label>
             <Input

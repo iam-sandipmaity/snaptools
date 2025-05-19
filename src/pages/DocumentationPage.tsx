@@ -74,7 +74,7 @@ const DocumentationPage = () => {
       <Header />
       <div className="flex-grow container py-8 flex gap-8">
         {/* Sidebar Navigation */}
-        <aside className="w-64 flex-shrink-0 hidden md:block">
+        <aside className="w-64 flex-shrink-0 hidden md:block pt-16">
           <div className="sticky top-8">
             <div className="flex items-center gap-2 px-4 py-2 bg-muted rounded-lg mb-6">
               <Search className="w-4 h-4 text-muted-foreground" />
@@ -149,7 +149,7 @@ const DocumentationPage = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-grow max-w-3xl">
+        <main className="flex-grow max-w-3xl pt-20">
           <h1 className="text-4xl font-bold mb-8">Documentation</h1>
           <div className="prose prose-slate dark:prose-invert max-w-none">
             {visibleSections.includes('getting-started') && (

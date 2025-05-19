@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Card } from '@/components/ui/card';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
 import { Copy, Clipboard } from 'lucide-react';
-import { useToast } from '@/components/ui/use-toast';
 
-const HTMLEncodeTool = () => {
+const URLEncoderTool = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const { toast } = useToast();
 
-  const encodeHTML = () => {
+  const encodeURL = () => {
     try {
       if (!input.trim()) {
         toast({
@@ -21,13 +21,12 @@ const HTMLEncodeTool = () => {
         });
         return;
       }
-      const encoded = input
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+      const encoded = encodeURIComponent(input);
       setOutput(encoded);
+      toast({
+        title: 'Success',
+        description: 'Text encoded successfully'
+      });
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -37,7 +36,7 @@ const HTMLEncodeTool = () => {
     }
   };
 
-  const decodeHTML = () => {
+  const decodeURL = () => {
     try {
       if (!input.trim()) {
         toast({
@@ -47,10 +46,12 @@ const HTMLEncodeTool = () => {
         });
         return;
       }
-      const textarea = document.createElement('textarea');
-      textarea.innerHTML = input;
-      const decoded = textarea.value;
+      const decoded = decodeURIComponent(input);
       setOutput(decoded);
+      toast({
+        title: 'Success',
+        description: 'Text decoded successfully'
+      });
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -80,6 +81,10 @@ const HTMLEncodeTool = () => {
     try {
       const text = await navigator.clipboard.readText();
       setInput(text);
+      toast({
+        title: 'Pasted!',
+        description: 'Text pasted from clipboard'
+      });
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -93,28 +98,27 @@ const HTMLEncodeTool = () => {
     <div className="container mx-auto p-6 space-y-6">
       <Card className="p-6">
         <div className="mb-6 space-y-4 text-muted-foreground">
-          <h2 className="text-xl font-semibold text-foreground">HTML Encoder/Decoder</h2>
+          <h2 className="text-xl font-semibold text-foreground">URL Encoder/Decoder</h2>
           <p>
-            HTML encoding converts special characters into their HTML entity equivalents,
-            making text safe for display in web pages and preventing XSS (Cross-Site Scripting) attacks.
+            URL encoding is essential for ensuring special characters in URLs are properly transmitted over the internet.
+            It converts special characters into a format that can be safely used in web addresses.
           </p>
           <div className="space-y-2">
             <h3 className="text-lg font-medium text-foreground">When to use:</h3>
             <ul className="list-disc pl-6 space-y-1">
-              <li>Displaying user-generated content safely on web pages</li>
-              <li>Preventing XSS attacks in web applications</li>
-              <li>Ensuring special characters render correctly in HTML</li>
-              <li>Processing text that contains HTML markup characters</li>
+              <li>Encoding query parameters in URLs</li>
+              <li>Handling special characters in API requests</li>
+              <li>Ensuring safe transmission of Unicode characters</li>
+              <li>Processing form data with special characters</li>
             </ul>
           </div>
           <div className="space-y-2">
             <h3 className="text-lg font-medium text-foreground">Common examples:</h3>
             <ul className="list-disc pl-6 space-y-1">
-              <li>{"<"} becomes {"&lt;"}</li>
-              <li>{">"} becomes {"&gt;"}</li>
-              <li>{"&"} becomes {"&amp;"}</li>
-              <li>{'"'} becomes {"&quot;"}</li>
-              <li>{"'"} becomes {"&#039;"}</li>
+              <li>Space becomes "%20"</li>
+              <li>"&" becomes "%26"</li>
+              <li>"=" becomes "%3D"</li>
+              <li>"?" becomes "%3F"</li>
             </ul>
           </div>
         </div>
@@ -142,11 +146,11 @@ const HTMLEncodeTool = () => {
 
           {/* Action Buttons */}
           <div className="flex gap-4 justify-center">
-            <Button onClick={encodeHTML} className="flex-1">
-              HTML Encode
+            <Button onClick={encodeURL} className="flex-1">
+              URL Encode
             </Button>
-            <Button onClick={decodeHTML} className="flex-1">
-              HTML Decode
+            <Button onClick={decodeURL} className="flex-1">
+              URL Decode
             </Button>
           </div>
 
@@ -171,10 +175,20 @@ const HTMLEncodeTool = () => {
               </div>
             </div>
           )}
+
+          <div className="text-sm text-muted-foreground space-y-2">
+            <p className="font-medium">Tips:</p>
+            <ul className="list-disc pl-6 space-y-1">
+              <li>Always encode query parameters before adding them to URLs</li>
+              <li>Decode encoded URLs to verify the original content</li>
+              <li>Use URL encoding for all non-alphanumeric characters in URLs</li>
+              <li>Remember that some characters like forward slash (/) and colon (:) are typically left unencoded</li>
+            </ul>
+          </div>
         </div>
       </Card>
     </div>
   );
 };
 
-export default HTMLEncodeTool;
+export default URLEncoderTool;

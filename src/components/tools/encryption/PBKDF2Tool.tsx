@@ -1,3 +1,37 @@
+/**
+ * PBKDF2 Key Derivation Function Tool Component
+ *
+ * PBKDF2 (Password-Based Key Derivation Function 2) is a key derivation function
+ * that is part of RSA Laboratories' Public-Key Cryptography Standards (PKCS) series.
+ * It applies a pseudorandom function to derive keys by iterating the function many
+ * times, making the process computationally intensive and resistant to brute-force attacks.
+ *
+ * Key Features:
+ * - Configurable iteration count for adjustable security level
+ * - Multiple hash function options (SHA-256, SHA-512, SHA-1)
+ * - Salt support for unique key derivation
+ * - NIST approved and widely used in cryptographic applications
+ *
+ * Parameters:
+ * - Password: The input password to derive the key from
+ * - Salt: Random value to ensure unique keys (should be at least 16 bytes)
+ * - Iterations: Number of times to apply the PRF (higher is more secure)
+ * - Hash Function: The underlying hash function to use (SHA-256 recommended)
+ *
+ * Common Use Cases:
+ * - Password storage in databases
+ * - Key generation for encryption
+ * - Token generation for authentication
+ * - Password reset functionality
+ *
+ * Security Considerations:
+ * - Use a minimum of 10,000 iterations (NIST recommendation)
+ * - Generate cryptographically secure random salt
+ * - Prefer SHA-256 or SHA-512 over SHA-1
+ * - Store all parameters with derived key for verification
+ * - Increase iterations based on hardware capabilities
+ */
+
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -60,6 +94,26 @@ const PBKDF2Tool: React.FC = () => {
     <Card className="w-full max-w-3xl mx-auto">
       <CardContent className="p-6">
         <div className="space-y-4">
+          <div className="space-y-2 mb-6 text-sm text-muted-foreground">
+            <p className="font-medium text-foreground">PBKDF2 Key Derivation</p>
+            <p>PBKDF2 is a key derivation function that applies a pseudorandom function multiple times to derive secure cryptographic keys from passwords. It's designed to be computationally intensive to resist brute-force attacks.</p>
+            <div className="mt-4">
+              <p className="font-medium text-foreground mb-2">Key Features:</p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Configurable iteration count for adjustable security</li>
+                <li>Multiple hash function options (SHA-256, SHA-512)</li>
+                <li>NIST approved and widely used in cryptographic applications</li>
+              </ul>
+            </div>
+            <div className="mt-4">
+              <p className="font-medium text-foreground mb-2">Security Tips:</p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Use minimum 10,000 iterations (NIST recommendation)</li>
+                <li>Prefer SHA-256 or SHA-512 over SHA-1</li>
+                <li>Always use a cryptographically secure random salt</li>
+              </ul>
+            </div>
+          </div>
           <div className="space-y-2">
             <Label>Input Password</Label>
             <Input

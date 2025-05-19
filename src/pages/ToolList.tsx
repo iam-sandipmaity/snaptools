@@ -3,6 +3,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import ToolsSearchBar from "@/components/tools-search-bar";
 import { toolCategories } from "@/data/tools";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { ChevronDown, ArrowLeft } from "lucide-react";
@@ -44,15 +45,17 @@ const ToolList = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow container py-8">
+      <main className="flex-grow container py-8 pt-20">
         <div className="mb-8">
-          <button
+          <motion.button
             onClick={() => navigate('/')}
             className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-4 bg-transparent border-none cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <ArrowLeft size={16} className="mr-2" />
             Back
-          </button>
+          </motion.button>
           <h1 className="text-4xl font-bold mb-4">All Tools</h1>
           <p className="text-muted-foreground max-w-2xl mb-6">
             Browse our complete collection of tools, organized by category.

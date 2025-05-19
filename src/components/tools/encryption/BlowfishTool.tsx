@@ -8,7 +8,7 @@ import { Copy, Clipboard, Eye, EyeOff } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import CryptoJS from 'crypto-js';
 
-const DESTool = () => {
+const BlowfishTool = () => {
   const [input, setInput] = useState('');
   const [key, setKey] = useState('');
   const [output, setOutput] = useState('');
@@ -26,7 +26,7 @@ const DESTool = () => {
         return;
       }
 
-      const encrypted = CryptoJS.DES.encrypt(input, key).toString();
+      const encrypted = CryptoJS.Blowfish.encrypt(input, key).toString();
       setOutput(encrypted);
     } catch (error) {
       toast({
@@ -48,7 +48,7 @@ const DESTool = () => {
         return;
       }
 
-      const decrypted = CryptoJS.DES.decrypt(input, key);
+      const decrypted = CryptoJS.Blowfish.decrypt(input, key);
       const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
 
       if (!decryptedText) {
@@ -98,15 +98,21 @@ const DESTool = () => {
     <div className="container mx-auto p-6 space-y-6">
       <Card className="p-6">
         <div className="mb-6">
-          <h2 className="text-2xl font-bold mb-4">DES Encryption Tool</h2>
-          <p className="mb-2">Data Encryption Standard (DES) is a symmetric-key block cipher encryption algorithm that was widely used for secure data transmission.</p>
+          <h2 className="text-2xl font-bold mb-4">Blowfish Encryption Tool</h2>
+          <p className="mb-2">Blowfish is a symmetric-key block cipher designed by Bruce Schneier in 1993. It provides a good encryption rate and is known for its strong security.</p>
           <div className="space-y-2 text-sm text-muted-foreground">
-            <p>✨ <strong>What is DES?</strong> DES is a block cipher algorithm that uses a 56-bit key to encrypt 64-bit blocks of data, operating through 16 rounds of cryptographic operations.</p>
-            <p>🔐 <strong>Common Uses:</strong> Historical data protection, legacy systems, and as a foundation for more secure variants like Triple DES.</p>
+            <p>✨ <strong>What is Blowfish?</strong> Blowfish is a fast block cipher that uses a variable-length key, from 32 bits to 448 bits, making it both flexible and secure for various applications.</p>
+            <p>🔐 <strong>Common Uses:</strong></p>
+            <ul className="list-disc list-inside pl-4 space-y-1">
+              <li>Password hashing systems</li>
+              <li>File and disk encryption</li>
+              <li>Secure communication protocols</li>
+              <li>Database encryption</li>
+            </ul>
             <p>📝 <strong>How to Use:</strong></p>
             <ul className="list-disc list-inside pl-4 space-y-1">
               <li>Enter your text in the input field</li>
-              <li>Provide a strong encryption key</li>
+              <li>Provide a strong encryption key (32-448 bits)</li>
               <li>Click Encrypt to secure your data or Decrypt to reveal encrypted content</li>
             </ul>
           </div>
@@ -191,4 +197,4 @@ const DESTool = () => {
   );
 };
 
-export default DESTool;
+export default BlowfishTool;

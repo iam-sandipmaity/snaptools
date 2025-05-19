@@ -97,6 +97,20 @@ const AESTool = () => {
   return (
     <div className="container mx-auto p-6 space-y-6">
       <Card className="p-6">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold mb-4">AES Encryption Tool</h2>
+          <p className="mb-2">Advanced Encryption Standard (AES) is one of the most secure encryption algorithms widely used for sensitive data protection.</p>
+          <div className="space-y-2 text-sm text-muted-foreground">
+            <p>✨ <strong>What is AES?</strong> AES is a symmetric encryption algorithm that uses the same key for both encryption and decryption.</p>
+            <p>🔐 <strong>Common Uses:</strong> Protecting sensitive data, secure communications, file encryption, and password storage.</p>
+            <p>📝 <strong>How to Use:</strong></p>
+            <ul className="list-disc list-inside pl-4 space-y-1">
+              <li>Enter your text in the input field</li>
+              <li>Provide a strong encryption key</li>
+              <li>Click Encrypt to secure your data or Decrypt to reveal encrypted content</li>
+            </ul>
+          </div>
+        </div>
         <div className="space-y-6">
           {/* Input Section */}
           <div className="space-y-2">

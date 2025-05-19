@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { toolCategories, ToolCategory } from "@/data/tools";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -69,7 +70,7 @@ const ToolPage = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-grow flex items-center justify-center">
+        <main className="flex-grow flex items-center justify-center pt-20">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Category not found</h1>
             <Link to="/#tools">
@@ -88,7 +89,7 @@ const ToolPage = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-grow container py-8">
+        <main className="flex-grow container py-8 pt-20">
           <div className="mb-8">
             <button
               onClick={() => navigate('/tools')}
@@ -241,9 +242,9 @@ const ToolPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow container py-8">
+      <main className="flex-grow container py-8 pt-[80px]">
         <div className="mb-8">
-          <button
+          <motion.button
             onClick={() => {
               if (categoryId && toolId) {
                 navigate(`/tools/${categoryId}`);
@@ -254,10 +255,12 @@ const ToolPage = () => {
               }
             }}
             className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-4 bg-transparent border-none cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <ArrowLeft size={16} className="mr-2" />
             Back
-          </button>
+          </motion.button>
           
           <div className="flex items-center gap-4 mb-6">
             <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center", category.color)}>

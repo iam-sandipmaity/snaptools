@@ -130,7 +130,39 @@ const SHATool = () => {
   return (
     <div className="container mx-auto p-6 space-y-6">
       <Card className="p-6">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold mb-4">SHA Hash Generator</h2>
+          <p className="mb-2">SHA (Secure Hash Algorithm) is a family of cryptographic hash functions designed to provide a unique, fixed-size representation of data.</p>
+          <div className="space-y-2 text-sm text-muted-foreground">
+            <p>✨ <strong>What is SHA?</strong> SHA generates a fixed-length string (hash) from any input, making it impossible to reconstruct the original data from the hash.</p>
+            <p>🔐 <strong>Available Variants:</strong></p>
+            <ul className="list-disc list-inside pl-4 space-y-1">
+              <li>SHA-1 (160 bits) - Legacy algorithm, not recommended for security-critical applications</li>
+              <li>SHA-256 (256 bits) - Most widely used, excellent security for general purposes</li>
+              <li>SHA-384 (384 bits) - Stronger variant, good for sensitive applications</li>
+              <li>SHA-512 (512 bits) - Highest security, ideal for critical systems</li>
+            </ul>
+            <p>📝 <strong>Common Uses:</strong></p>
+            <ul className="list-disc list-inside pl-4 space-y-1">
+              <li>Digital signatures and certificates</li>
+              <li>Password hashing and storage</li>
+              <li>File integrity verification</li>
+              <li>Blockchain and cryptocurrency systems</li>
+            </ul>
+          </div>
+        </div>
         <div className="space-y-6">
+          {/* How to Use Section */}
+          <div className="mb-6 text-sm text-muted-foreground">
+            <p>🔍 <strong>How to Use:</strong></p>
+            <ol className="list-decimal list-inside pl-4 space-y-1">
+              <li>Select your preferred SHA variant based on your security needs</li>
+              <li>Enter or paste the text you want to hash</li>
+              <li>Click "Generate Hash" to create the hash value</li>
+              <li>To verify a hash, enter the original text and the hash value, then click "Verify"</li>
+            </ol>
+          </div>
+
           {/* SHA Variant Selection */}
           <div className="space-y-2">
             <Label>SHA Variant</Label>

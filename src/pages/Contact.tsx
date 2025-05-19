@@ -51,7 +51,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 container py-12">
+      <main className="flex-1 container py-12 pt-20">
         <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
         
         <div className="grid md:grid-cols-2 gap-12">

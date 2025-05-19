@@ -43,7 +43,7 @@ const ToolCategoryPage = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-grow flex items-center justify-center">
+        <main className="flex-grow flex items-center justify-center  pt-20">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Category not found</h1>
             <Link to="/#tools">
@@ -61,8 +61,8 @@ const ToolCategoryPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow container py-8">
-        <div className="mb-8">
+      <main className="flex-grow container py-8  pt-20">
+        <div className="mb-8 ">
           <motion.button
             onClick={() => navigate('/tools')}
             className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-4 bg-transparent border-none cursor-pointer"

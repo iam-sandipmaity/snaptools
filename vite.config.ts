@@ -10,7 +10,7 @@ import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfil
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => ({
   optimizeDeps: {
-    exclude: ['scrypt-js'],
+    exclude: ['scrypt-js', 'argon2-browser'],
     esbuildOptions: {
       target: 'esnext',
       supported: {

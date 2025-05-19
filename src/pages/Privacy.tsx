@@ -6,7 +6,7 @@ const Privacy = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 container py-12">
+      <main className="flex-1 container py-12 pt-20">
         <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
         
         <div className="prose prose-gray max-w-none">

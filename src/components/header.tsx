@@ -15,9 +15,9 @@ const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Explore Tools", href: "/tools" },
   { label: "Features", href: "/features" },
-  { label: "About", href: "/about" },
+  // { label: "About", href: "/about" },
   { label: "Documentation", href: "/documentation" },
-  { label: "Pricing", href: "/pricing" },
+  // { label: "Pricing", href: "/pricing" },
   { label: "Donate", href: "/donate" },
   { label: "Code Runner (Runr)", href: "https://runr.vercel.app/" },
 ];
@@ -47,7 +47,7 @@ const Header = () => {
 
   return (
     // <header className="fixed top-0 z-[9999] w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"></header>
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <Logo />
         
