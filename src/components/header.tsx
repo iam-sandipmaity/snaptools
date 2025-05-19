@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "./ui/logo";
@@ -47,6 +46,7 @@ const Header = () => {
   };
 
   return (
+    // <header className="fixed top-0 z-[9999] w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"></header>
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <Logo />
@@ -101,7 +101,7 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMobile && (
           <div 
-            className={`fixed inset-0 top-16 z-50 bg-gradient-to-b from-background/95 to-background/98 backdrop-blur-md border-t border-border/40 transform transition-transform duration-300 ease-in-out shadow-xl ${
+            className={`fixed inset-0 top-16 z-50 bg-gradient-to-b from-background/105 to-background/108 backdrop-blur-md border-t border-border/40 transform transition-transform duration-300 ease-in-out shadow-xl ${
               mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
           >

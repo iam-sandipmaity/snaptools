@@ -245,7 +245,7 @@ const DocumentationPage = () => {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-xl font-medium mb-2">Are the tools free to use?</h3>
-                    <p className="text-muted-foreground">Most tools offer free basic functionality. Premium features are available with a subscription. If you'd like to support our development, please visit our <Link to="/donate" className="text-primary hover:underline">donation page</Link>.</p>
+                    <p className="text-muted-foreground">Yes, all our tools are free to use! However, if you find our tools helpful and would like to support continued development, we greatly appreciate donations through our <Link to="/donate" className="text-primary hover:underline">donation page</Link>.</p>
                   </div>
                   <div>
                     <h3 className="text-xl font-medium mb-2">Is my data secure?</h3>
@@ -261,11 +261,11 @@ const DocumentationPage = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-medium mb-2">Can I use the tools offline?</h3>
-                    <p className="text-muted-foreground">Some tools offer offline functionality. Check individual tool descriptions for offline availability. Note that tools requiring API connections will need internet access.</p>
+                    <p className="text-muted-foreground">An internet connection is required to access our tools through the website. However, we process all your data locally on your device - nothing is stored on our servers, ensuring your privacy and security.</p>
                   </div>
                   <div>
                     <h3 className="text-xl font-medium mb-2">What file formats are supported?</h3>
-                    <p className="text-muted-foreground">Supported formats vary by tool. Each tool's documentation lists its supported file types. Some formats might have limitations based on current implementation status.</p>
+                    <p className="text-muted-foreground">We support a wide range of file formats across our tools. While some formats might not be supported yet, we're actively working on expanding format compatibility. Check each tool's documentation for specific format support details.</p>
                   </div>
                   <div>
                     <h3 className="text-xl font-medium mb-2">Are there any planned features?</h3>

@@ -5,19 +5,19 @@ const FAQSection = () => {
   const faqs = [
     {
       question: "Are the tools free to use?",
-      answer: "Most tools offer free basic functionality. Premium features are available with a subscription."
+      answer: "Yes! All tools are completely free to use. While we welcome donations to support development, there are no premium features or subscriptions required."
     },
     {
       question: "Is my data secure?",
-      answer: "We prioritize your privacy and security. Files are processed locally when possible and securely transmitted when cloud processing is required."
+      answer: "We take your privacy seriously. All processing happens locally on your device - your files never leave your computer unless explicitly required for specific cloud-based features, which are clearly marked."
     },
     {
       question: "Can I use the tools offline?",
-      answer: "Some tools offer offline functionality. Check individual tool descriptions for offline availability. Note that tools requiring API connections will need internet access."
+      answer: "Most tools work entirely offline since they process files locally. A few features that require external services (like AI processing or cloud storage) will need an internet connection."
     },
     {
       question: "What file formats are supported?",
-      answer: "Supported formats vary by tool. Each tool's documentation lists its supported file types."
+      answer: "We support a wide range of common file formats including images, documents, and media files. Our format support is continuously expanding based on user needs and feedback."
     }
   ];
 

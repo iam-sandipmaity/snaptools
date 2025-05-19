@@ -1,13 +1,24 @@
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
 
-interface NavLinkProps {
+type NavItem = {
+  href: string;
+  label: string;
+};
+
+const navigationItems: NavItem[] = [
+  { href: "/tools", label: "Tools" },
+  { href: "/documentation", label: "Documentation" },
+  { href: "/about", label: "About" },
+  { href: "/donate", label: "Donate" },
+];
+
+interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   children: React.ReactNode;
-  className?: string;
 }
 
-const NavLink = ({ href, children, className }: NavLinkProps) => {
+const NavLink = ({ href, children, className, ...props }: NavLinkProps) => {
   const location = useLocation();
   const isActive = location.pathname === href;
 
@@ -19,6 +30,8 @@ const NavLink = ({ href, children, className }: NavLinkProps) => {
         isActive ? "text-primary" : "text-muted-foreground",
         className
       )}
+      aria-current={isActive ? "page" : undefined}
+      {...props}
     >
       {children}
     </Link>
@@ -27,11 +40,16 @@ const NavLink = ({ href, children, className }: NavLinkProps) => {
 
 const SiteNav = () => {
   return (
-    <nav className="flex items-center space-x-6">
-      <NavLink href="/tools">Tools</NavLink>
-      <NavLink href="/documentation">Documentation</NavLink>
-      <NavLink href="/about">About</NavLink>
-      <NavLink href="/donate">Donate</NavLink>
+    <nav
+      className="flex items-center space-x-6 md:space-x-8"
+      role="navigation"
+      aria-label="Main navigation"
+    >
+      {navigationItems.map((item) => (
+        <NavLink key={item.href} href={item.href}>
+          {item.label}
+        </NavLink>
+      ))}
     </nav>
   );
 };
