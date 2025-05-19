@@ -69,7 +69,7 @@ const Contact = () => {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5" />
-                <span>+91 780****** (Please reach out through email)</span>
+                <span>+91 7866089993 (If You have any questions please reach out through mail, call me if you really need)</span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5" />
