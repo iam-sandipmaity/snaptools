@@ -80,14 +80,17 @@ const Header = () => {
         )}
 
         {isMobile && (
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={toggleMobileMenu}
-            className="relative z-50"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </Button>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={toggleMobileMenu}
+              className="relative z-50"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </Button>
+          </div>
         )}
 
         {/* Mobile Menu Backdrop */}
@@ -124,7 +127,6 @@ const Header = () => {
                 </Link>
               ))}
               <div className="flex items-center gap-4 mt-4">
-                <ThemeToggle />
                 <Button 
                   onClick={() => {
                     setMobileMenuOpen(false);
