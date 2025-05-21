@@ -2,6 +2,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import SEO from "@/components/seo";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { toolCategories, ToolCategory } from "@/data/tools";
@@ -241,6 +242,7 @@ const ToolPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO type="tool" categoryId={categoryId} toolId={toolId} />
       <Header />
       <main className="flex-grow container py-8 pt-[80px]">
         <div className="mb-8">

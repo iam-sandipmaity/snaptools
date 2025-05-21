@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import SEO from "@/components/seo";
 import { toolCategories, ToolCategory } from "@/data/tools";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -60,6 +61,8 @@ const ToolCategoryPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO type="category" categoryId={categoryId} />
+      <SEO type="category" categoryId={categoryId} />
       <Header />
       <main className="flex-grow container py-8  pt-20">
         <div className="mb-8 ">

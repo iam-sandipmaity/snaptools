@@ -19,6 +19,7 @@ const navItems: NavItem[] = [
   { label: "Documentation", href: "/documentation" },
   // { label: "Pricing", href: "/pricing" },
   { label: "Donate", href: "/donate" },
+  { label: "Blog", href: "/blog" },
   { label: "Code Runner (Runr)", href: "https://runr.vercel.app/" },
 ];
 

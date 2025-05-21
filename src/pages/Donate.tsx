@@ -241,11 +241,11 @@ const DonationPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <div className="container mx-auto py-12 px-4 flex-grow">
+      <div className="container mx-auto py-20 px-4 flex-grow ">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Support Tooltopia</h1>
+        <h1 className="text-4xl font-bold mb-4">Support SnapTools</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Your donations help us maintain and improve Tooltopia, keeping it free and accessible for everyone.
+          Your donations help us maintain and improve SnapTools, keeping it free and accessible for everyone.
         </p>
       </div>
 

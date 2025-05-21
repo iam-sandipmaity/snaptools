@@ -17,11 +17,11 @@ User-agent: facebookexternalhit
 Allow: /
 
 # Sitemap
-Sitemap: https://tooltopia.com/sitemap.xml
+Sitemap: https://snap-tools.vercel.app/sitemap.xml
 
-# Crawl-delay
+# Optimize crawl rate
 Crawl-delay: 1
-Allow: /
 
+# Global allow
 User-agent: *
 Allow: /

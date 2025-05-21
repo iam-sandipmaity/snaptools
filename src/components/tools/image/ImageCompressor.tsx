@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Upload, Download, Image as ImageIcon } from "lucide-react";
 import { toast } from "sonner";
+import { LazyImage } from "@/components/ui/lazy-image";
 
 const ImageCompressor = () => {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
@@ -160,7 +161,7 @@ const ImageCompressor = () => {
             <div className="space-y-2">
               <Label>Original Image</Label>
               <div className="border rounded-md overflow-hidden bg-checkerboard">
-                <img 
+                <LazyImage 
                   src={originalImage} 
                   alt="Original" 
                   className="w-full h-auto max-h-[300px] object-contain"
@@ -171,7 +172,7 @@ const ImageCompressor = () => {
             <div className="space-y-2">
               <Label>Compressed Image</Label>
               <div className="border rounded-md overflow-hidden bg-checkerboard">
-                <img 
+                <LazyImage 
                   src={compressedImage || ''} 
                   alt="Compressed" 
                   className="w-full h-auto max-h-[300px] object-contain"

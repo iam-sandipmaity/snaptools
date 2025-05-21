@@ -6,7 +6,7 @@ const Terms = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 container py-12">
+      <main className="flex-1 container py-20">
         <h1 className="text-4xl font-bold mb-8">Terms and Conditions</h1>
         
         <div className="prose prose-gray max-w-none">

@@ -2,6 +2,7 @@ import React from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Shield, Gauge, Laptop, Cloud, Users } from "lucide-react";
 
 const FeatureCard = ({
@@ -59,15 +60,17 @@ const Features = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow container py-16">
+      <main className="flex-grow container py-20">
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold mb-4">Powerful Features for Everyone</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
             Discover the tools and features that make our platform the perfect choice for your needs.
           </p>
-          <Button className="inline-flex items-center gap-2">
-            Try it Free <ArrowRight className="h-4 w-4" />
-          </Button>
+          <Link to="/tools">
+            <Button className="inline-flex items-center gap-2">
+              Try it Free <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -82,10 +85,8 @@ const Features = () => {
             Join thousands of users who trust our platform for their daily tasks.
           </p>
           <div className="flex gap-4 justify-center">
-            <Button size="lg">Start for Free</Button>
-            <Button size="lg" variant="outline">
-              View Pricing
-            </Button>
+            <Link to="/tools"> <Button size="lg">Start for Free</Button> </Link>
+            <Link to="/pricing"> <Button size="lg" variant="outline">View Pricing  </Button>  </Link>
           </div>
         </div>
       </main>
