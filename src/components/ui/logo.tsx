@@ -11,7 +11,7 @@ interface LogoProps {
 const Logo = ({ className }: LogoProps) => {
   const { theme, systemTheme } = useTheme();
   const logoSrc1 = "/logo-1.png";
-  const logoSrc2 = "/logo.png";
+  const logoSrc2 = "/logo.svg";
   const isDark = theme === "system" ? systemTheme === "dark" : theme === "dark";
   const logoSrc = isDark ? logoSrc1 : logoSrc2;
 
