@@ -3,8 +3,11 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import { Link } from 'react-router-dom';
 import { Clock, User, Calendar, Tag } from 'lucide-react';
+import { title } from 'process';
 
 const BlogList = () => {
+  const [selectedTag, setSelectedTag] = React.useState<string | null>(null);
+
   const blogPosts = [
     {
       id: 'image-optimization-guide',
@@ -32,7 +35,26 @@ const BlogList = () => {
       date: '2024-01-05',
       tags: ['Security', 'Password Management', 'Best Practices'],
       readTime: '12 min read'
+    },
+    {
+      id: 'qr-code-best-practices',
+      title: 'QR Code Best Practices',
+      description: 'Learn how to create effective QR codes for various purposes and applications.',
+      author: 'SnapTools Team',
+      date: '2024-01-01',
+      tags: ['QR Codes', 'Bar Code', 'Mobile Apps'],
+      readTime: '9 min read'
+    },
+    {
+      id: 'unit-conversion-guide',
+      title: 'Unit Conversion Guide',
+      description: 'Master the art of converting units effortlessly with our comprehensive guide.',
+      author: 'SnapTools Team',
+      date: '2024-01-05',
+      tags: ['Unit Conversion', 'Measurement', 'Tutorial'],
+      readTime: '15 min read'
     }
+  
   ];
 
   return (
@@ -41,13 +63,33 @@ const BlogList = () => {
       <main className="flex-grow container py-8 pt-20">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-4">Blog</h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground mb-6">
             Discover the latest insights, tutorials, and best practices from the SnapTools team.
           </p>
+          
+          <div className="flex flex-wrap gap-2 mb-6">
+            <button
+              onClick={() => setSelectedTag(null)}
+              className={`px-4 py-2 rounded-full transition-colors ${!selectedTag ? 'bg-primary text-primary-foreground' : 'bg-primary/10 text-primary hover:bg-primary/20'}`}
+            >
+              All Posts
+            </button>
+            {Array.from(new Set(blogPosts.flatMap(post => post.tags))).map((tag) => (
+              <button
+                key={tag}
+                onClick={() => setSelectedTag(tag)}
+                className={`px-4 py-2 rounded-full transition-colors ${selectedTag === tag ? 'bg-primary text-primary-foreground' : 'bg-primary/10 text-primary hover:bg-primary/20'}`}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="grid gap-8">
-          {blogPosts.map((post) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {blogPosts
+            .filter(post => !selectedTag || post.tags.includes(selectedTag))
+            .map((post) => (
             <article
               key={post.id}
               className="p-6 rounded-xl border bg-card hover:shadow-lg transition-all hover:border-primary/20"

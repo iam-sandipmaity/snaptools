@@ -1,10 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import UnitConversionGuide from "./post/UnitConversionGuide";
 
 const BlogList = lazy(() => import("./pages/BlogList"));
 const PDFManipulationTechniques = lazy(() => import("./post/PDFManipulationTechniques"));
 const ImageOptimizationGuide = lazy(() => import("./post/ImageOptimizationGuide"));
 const SecurePasswordGuide = lazy(() => import("./post/SecurePasswordGuide"));
+const QRCodeBestPractices = lazy(() => import("./post/QRCodeBestPractices"));
 
 const LoadingFallback = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -28,6 +30,14 @@ const BlogRouter = () => {
         <Route
           path="/posts/secure-password-guide"
           element={<SecurePasswordGuide />}
+        />
+        <Route
+          path="/posts/qr-code-best-practices"
+          element={<QRCodeBestPractices />}
+        />
+        <Route
+          path="/posts/unit-conversion-guide"
+          element={<UnitConversionGuide />}
         />
       </Routes>
     </Suspense>
