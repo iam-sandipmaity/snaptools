@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronRight, FileText, Scissors, RotateCcw, Shield, Zap, RefreshCw, Edit3, Search, Clock, User, Calendar, Tag } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 const PDFManipulationTechniques = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -264,10 +265,12 @@ const PDFManipulationTechniques = () => {
               Start implementing these techniques today with SnapTools' comprehensive suite of PDF tools. Our intuitive interface and powerful features make it easy to apply these advanced techniques to your workflow.
             </p>
             
+            <Link to="/tools/pdf/" target="_blank" rel="noopener noreferrer">
             <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors inline-flex items-center gap-2">
               Get Started with SnapTools
               <ChevronRight className="w-4 h-4" />
             </button>
+            </Link>
           </div>
         </div>
       </main>

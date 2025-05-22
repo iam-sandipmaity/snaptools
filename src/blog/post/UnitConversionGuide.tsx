@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronRight, Calculator, Code, Zap, Globe, Ruler, Clock, Thermometer, Weight, Droplets, User, Calendar, Tag, Target, CheckCircle, AlertCircle, BookOpen, Settings, TrendingUp, Database, Smartphone, Monitor } from 'lucide-react';
 
 const UnitConversionGuide = () => {
@@ -541,14 +542,18 @@ const useUnitConverter = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-cyan-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 justify-center">
-                Explore All Converters
-                <Calculator className="w-4 h-4" />
-              </button>
-              <button className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-cyan-600 transition-colors inline-flex items-center gap-2 justify-center">
-                Developer API
-                <Code className="w-4 h-4" />
-              </button>
+              <Link to="/tools/conversion" target="_blank" rel="noopener noreferrer">
+                <button className="bg-white text-cyan-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 justify-center">
+                  Explore All Converters
+                  <Calculator className="w-4 h-4" />
+                </button>
+              </Link>
+              <Link to="/tools/unit" target="_blank" rel="noopener noreferrer">
+                <button className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-cyan-600 transition-colors inline-flex items-center gap-2 justify-center">
+                  Unit Converter
+                  <Code className="w-4 h-4" />
+                </button>
+              </Link>
             </div>
           </div>
         </div>

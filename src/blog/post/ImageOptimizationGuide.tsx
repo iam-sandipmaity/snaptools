@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronRight, Image, Zap, Settings, MonitorSpeaker, Smartphone, Globe, BarChart3, Clock, User, Calendar, Tag, TrendingUp, Archive, FileImage, Palette, Eye, Code, Target } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 const ImageOptimizationGuide = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -146,15 +147,15 @@ const ImageOptimizationGuide = () => {
             <ChevronRight className="w-4 h-4" />
             <span>Image Optimization</span>
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
             The Ultimate Guide to Image Optimization for Web Performance
           </h1>
-          
+
           <p className="text-xl text-gray-600 mb-6 leading-relaxed">
             Master the art of image optimization to dramatically improve your website's loading speed, user experience, and search engine rankings. Learn industry-proven techniques and modern best practices.
           </p>
-          
+
           <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
             <div className="flex items-center gap-1">
               <User className="w-4 h-4" />
@@ -207,11 +208,10 @@ const ImageOptimizationGuide = () => {
           {techniques.map((technique, index) => (
             <div
               key={technique.id}
-              className={`border-2 rounded-xl transition-all duration-300 hover:shadow-lg cursor-pointer ${
-                activeSection === technique.id 
-                  ? getColorClasses(technique.color) 
+              className={`border-2 rounded-xl transition-all duration-300 hover:shadow-lg cursor-pointer ${activeSection === technique.id
+                  ? getColorClasses(technique.color)
                   : 'bg-white border-gray-200 hover:border-gray-300'
-              }`}
+                }`}
               onClick={() => setActiveSection(activeSection === technique.id ? null : technique.id)}
             >
               <div className="p-6">
@@ -219,7 +219,7 @@ const ImageOptimizationGuide = () => {
                   <div className={`p-3 rounded-lg flex-shrink-0 ${getBadgeClasses(technique.color)}`}>
                     {technique.icon}
                   </div>
-                  
+
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-2">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium flex-shrink-0 ${getBadgeClasses(technique.color)}`}>
@@ -229,11 +229,11 @@ const ImageOptimizationGuide = () => {
                         {technique.title}
                       </h3>
                     </div>
-                    
+
                     <p className="text-gray-600 mb-3">
                       {technique.description}
                     </p>
-                    
+
                     {activeSection === technique.id && (
                       <div className="mt-4 space-y-4">
                         <div className="p-4 bg-white rounded-lg border border-gray-200">
@@ -247,7 +247,7 @@ const ImageOptimizationGuide = () => {
                             ))}
                           </div>
                         </div>
-                        
+
                         {technique.tips && (
                           <div className="p-4 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border-l-4 border-blue-500">
                             <div className="flex items-start gap-2">
@@ -262,10 +262,9 @@ const ImageOptimizationGuide = () => {
                       </div>
                     )}
                   </div>
-                  
-                  <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0 ${
-                    activeSection === technique.id ? 'rotate-90' : ''
-                  }`} />
+
+                  <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0 ${activeSection === technique.id ? 'rotate-90' : ''
+                    }`} />
                 </div>
               </div>
             </div>
@@ -332,11 +331,11 @@ const ImageOptimizationGuide = () => {
         <div className="mt-12 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-xl p-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold mb-4">Start Optimizing Your Images Today</h2>
-            
+
             <p className="text-lg mb-6 opacity-90 max-w-2xl mx-auto">
               Transform your website's performance with professional image optimization tools. Reduce loading times, improve user experience, and boost your search rankings with our comprehensive suite of image optimization tools.
             </p>
-            
+
             <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6 border border-white border-opacity-20 mb-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
                 <div className="bg-white bg-opacity-10 rounded-lg p-4">
@@ -351,16 +350,20 @@ const ImageOptimizationGuide = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 justify-center">
-                Try Image Compressor
-                <Archive className="w-4 h-4" />
-              </button>
-              <button className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors inline-flex items-center gap-2 justify-center">
-                Format Converter
-                <FileImage className="w-4 h-4" />
-              </button>
+              <Link to="/tools/image/image-compressor" target="_blank" rel="noopener noreferrer">
+                <button className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 justify-center">
+                  Try Image Compressor
+                  <Archive className="w-4 h-4" />
+                </button>
+              </Link>
+              <Link to="/tools/image/image-format-converter" target="_blank" rel="noopener noreferrer">
+                <button className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors inline-flex items-center gap-2 justify-center">
+                  Format Converter
+                  <FileImage className="w-4 h-4" />
+                </button>
+              </Link>
             </div>
           </div>
         </div>

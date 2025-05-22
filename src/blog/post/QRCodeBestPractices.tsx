@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronRight, QrCode, Smartphone, Eye, Palette, Target, Users, BarChart3, Clock, User, Calendar, Tag, Wifi, Camera, Settings, MapPin, Star, TrendingUp, CheckCircle, AlertCircle } from 'lucide-react';
+
 
 const QRCodeBestPractices = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -397,14 +399,18 @@ const QRCodeBestPractices = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/tools/qr/qr-generator" target="_blank" rel="noopener noreferrer">
               <button className="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 justify-center">
                 Create QR Code
                 <QrCode className="w-4 h-4" />
               </button>
-              <button className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors inline-flex items-center gap-2 justify-center">
-                Generate Barcodes
-                <BarChart3 className="w-4 h-4" />
-              </button>
+              </Link>
+              <Link to="/tools/qr/barcode-generator" target="_blank" rel="noopener noreferrer">
+                <button className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors inline-flex items-center gap-2 justify-center">
+                  Generate Barcodes
+                  <BarChart3 className="w-4 h-4" />
+                </button>
+              </Link>
             </div>
           </div>
         </div>

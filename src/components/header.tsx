@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "./ui/logo";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
@@ -26,6 +26,8 @@ const navItems: NavItem[] = [
 const Header = () => {
   const isMobile = useMediaQuery("(max-width: 950px)");
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const location = useLocation();
+  // const isBlogPage = location.pathname.startsWith('/blog');
 
   React.useEffect(() => {
     if (mobileMenuOpen) {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronRight, Shield, Lock, Eye, EyeOff, AlertTriangle, CheckCircle, Clock, User, Calendar, Tag, Key, Smartphone, Database, Users, Server, Brain, Zap } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 const SecurePasswordGuide = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -389,14 +390,18 @@ const SecurePasswordGuide = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/tools/password/password-generator" target="_blank" rel="noopener noreferrer">
               <button className="bg-white text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 justify-center">
                 Generate Secure Password
                 <Key className="w-4 h-4" />
               </button>
+              </Link>
+              <Link to="/tools/encryption" target="_blank" rel="noopener noreferrer">
               <button className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-red-600 transition-colors inline-flex items-center gap-2 justify-center">
                 Explore Encryption Tools
                 <Lock className="w-4 h-4" />
               </button>
+            </Link>
             </div>
           </div>
         </div>
